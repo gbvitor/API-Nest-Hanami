@@ -18,14 +18,14 @@ model User {
   nome String?     
   login  String?  @unique 
   senha String?    
-  posts Post[]
+  posts Posts[]
 }
 
-model Post {
+model Posts {
   id        Int           @default(autoincrement()) @id
-  title     String?       
-  content   Bytes?        
-  publishDate DateTime?   @default(now())
-  author    User?         @relation(fields: [authorId], references: [id])
-  authorId  Int     
+  titulo     String?       
+  conteudo   Bytes?        
+  dataPublicacao DateTime?   @default(now())
+  autor    User?         @relation(fields: [autorId], references: [id])
+  autorId  Int     
 }

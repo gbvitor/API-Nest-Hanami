@@ -3,7 +3,7 @@ import { Prisma, User } from '@prisma/client';
 import { PrismaService } from 'src/prisma.service';
 
 @Injectable()
-export class UsersService {
+export class UserService {
   constructor(private prisma: PrismaService) {}
 
   async user(
@@ -31,22 +31,28 @@ export class UsersService {
     });
   }
 
+  //Cria um user
   async createUser(data: Prisma.UserCreateInput): Promise<User> {
     return this.prisma.user.create({
       data,
     });
   }
+
+  //Retorna todos os users
   async findAll(): Promise<User[]> {
     return this.prisma.user.findMany();
   }
-  async findOne(idUser: number): Promise<User | null> {
+
+  //Retorna um user
+  async findOne(id: number): Promise<User | null> {
     return this.prisma.user.findUnique({
       where: {
-        idUser: idUser,
+        id: id,
       },
     });
   }
 
+  //Atualiza um user
   async updateUser(params: {
     where: Prisma.UserWhereUniqueInput;
     data: Prisma.UserUpdateInput;
@@ -58,6 +64,7 @@ export class UsersService {
     });
   }
 
+  //Deleta um user
   async deleteUser(where: Prisma.UserWhereUniqueInput): Promise<User> {
     return this.prisma.user.delete({
       where,
